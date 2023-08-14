@@ -38,13 +38,23 @@ public class MVCHomePage {
 	
 	@PostMapping("/add-video")
 	public String addVideo(@ModelAttribute Video newVideo){
-		videoService.addVideo(newVideo);
+//		videoService.addVideo(newVideo);
+		videoService.addVideoToRepository(newVideo);
 		return "redirect:/";  // NOTE "redirect" is a Spring boot directive, and here it returns back to / . WHAT OTHER DIRECTIVES AVAILABLE ?? 
 	}
 
 	@PostMapping("/multi-field-search")
 	public String multiFieldSearch(@ModelAttribute VideoSearch search, Model model) {
 		List<VideoEntity> results = videoService.search(search);
+		model.addAttribute("searchResults", results);   // This model should be present in the index.mustache
+		return "index";
+	}
+
+	@GetMapping("/multi-field-search")
+	public String willItComehere(@ModelAttribute VideoSearch search, Model model) {
+		List<VideoEntity> results = videoService.search(search);
+
+		model.addAttribute("videos", videoService.getVideos());		// If not adding videos , main list is removed
 		model.addAttribute("searchResults", results);   // This model should be present in the index.mustache
 		return "index";
 	}

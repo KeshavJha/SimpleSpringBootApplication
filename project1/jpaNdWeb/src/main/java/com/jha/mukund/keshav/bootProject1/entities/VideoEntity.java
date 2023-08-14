@@ -14,6 +14,9 @@ public class VideoEntity {
 	@Getter
 	private String description;
 	
+	public VideoEntity() { } // Without this DEFAULT constructor, Hibernate will fail to initialize this table
+	//https://stackoverflow.com/questions/44088360/org-hibernate-instantiationexception-no-default-constructor-for-entity-princ
+
 	public VideoEntity(String name , String description) {
 		this.description = description;
 		this.name = name;

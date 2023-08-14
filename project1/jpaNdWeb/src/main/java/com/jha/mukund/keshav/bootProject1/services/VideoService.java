@@ -65,7 +65,6 @@ public class VideoService {
 		sampleVideos = new ArrayList<>(sampleVideos);
 		repository.save(new VideoEntity(video.name(), "Sample Description"));
 		System.out.println(repository.findByName(video.name()));
-		sampleVideos.add(video);
 	}
 
 	public List<VideoEntity> search(VideoSearch videoSearch) {
