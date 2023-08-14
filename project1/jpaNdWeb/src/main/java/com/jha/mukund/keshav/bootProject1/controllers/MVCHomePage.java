@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.jha.mukund.keshav.bootProject1.config.AppConfig;
+import com.jha.mukund.keshav.bootProject1.config.SampleVideoConfig;
 import com.jha.mukund.keshav.bootProject1.data.Video;
 import com.jha.mukund.keshav.bootProject1.data.VideoSearch;
 import com.jha.mukund.keshav.bootProject1.entities.VideoEntity;
@@ -16,10 +18,14 @@ import com.jha.mukund.keshav.bootProject1.services.VideoService;
 @Controller
 public class MVCHomePage {
 	private final VideoService videoService;
+	private final AppConfig appConfig;
+//	private final SampleVideoConfig videoConfig;
 	
-//	@Autowired  // NOTE : Since there is only one constructor we do not need to Autowire here
-	public MVCHomePage(VideoService vs) {
+//	@Autowired  // NOTE : Since there is only one constructor we do not need to Autowired here
+	public MVCHomePage(VideoService vs, AppConfig appConfig, SampleVideoConfig videoConfig) {
 		videoService = vs;
+		this.appConfig = appConfig;
+//		this.videoConfig = videoConfig;
 	}
 	
 	@GetMapping("/")

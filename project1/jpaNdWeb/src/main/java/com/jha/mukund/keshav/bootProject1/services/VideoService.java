@@ -1,6 +1,7 @@
 package com.jha.mukund.keshav.bootProject1.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.jha.mukund.keshav.bootProject1.config.SampleVideoConfig;
 import com.jha.mukund.keshav.bootProject1.data.Video;
 import com.jha.mukund.keshav.bootProject1.data.VideoSearch;
 import com.jha.mukund.keshav.bootProject1.entities.VideoEntity;
@@ -19,15 +21,31 @@ import lombok.Getter;
 
 @Service
 public class VideoService {
-	@Autowired
-	private VideoRepository repository;
+	private final VideoRepository repository;
+	private final SampleVideoConfig videoConfig;
 
 //	@Getter
-	List<Video> sampleVideos = List.of(
+	List<Video> sampleVideos;
+//			List.of(
 //			Arrays.asList( // NOTE Iss list ka bhi size change nahi kar sakte hain na . Check in JavaLearningProject
-			new Video("Sample First Video"),
-			new Video("Sample Second Video") // NOTE Server has to be restared for updates to model to be reflected
-			);
+//			new Video("Sample First Video"),
+//			new Video("Sample Second Video") // NOTE Server has to be restared for updates to model to be reflected
+//			);
+
+//	@Autowired
+	public VideoService(VideoRepository repo, SampleVideoConfig config) {
+		this.repository = repo;
+		this.videoConfig = config;
+		sampleVideos = videoConfig.sampleVideos();
+		if (sampleVideos == null) {
+			sampleVideos = List.of(
+//					Arrays.asList( // NOTE Iss list ka bhi size change nahi kar sakte hain na . Check in JavaLearningProject
+					new Video("Sample First Video"),
+					new Video("Sample Second Video") // NOTE Server has to be restared for updates to model to be reflected
+					);
+		}
+	}
+
 	
 	public List<Video> getVideos() {
 		List<VideoEntity> dbVideos = repository.findAll();
