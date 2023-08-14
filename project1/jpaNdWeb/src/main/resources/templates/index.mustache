@@ -1,0 +1,13 @@
+<h1> Welcome to the world of Spring Boot </h1>
+<p> Let us see what all it has to offer to us
+<form action="/add-video" method="post">
+	<input type="text" name="name">
+	<button type="submit">Submit</button>
+</form>
+
+<ul>
+ {{#videos}}
+ 	<li>{{name}}</li>
+ {{/videos}}
+</ul>
+ </p>
